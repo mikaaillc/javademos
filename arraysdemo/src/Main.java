@@ -11,7 +11,7 @@ public class Main {
             System.out.println(ogrenciler[i]);
         }
         for (String ogrenci:ogrenciler) {
-
+            System.out.println((ogrenci));
         }
     }
 }
