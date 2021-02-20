@@ -23,7 +23,7 @@ public class Main {
         return sayi1+sayi2;
     }
 
-    public static int topla2(int... sayilar){ // veriables arguments args
+    public static int topla2(int... sayilar){ // veriables arguments args üç nokta
         int toplam=0;
         for (int sayi:sayilar) {
             toplam+=sayi;
