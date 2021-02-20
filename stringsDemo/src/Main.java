@@ -5,6 +5,10 @@ public class Main {
 
 	System.out.println(mesaj);
 	System.out.println("Eleman sayısı "+mesaj.length());
-	System.out.println("5.eleman "+mesaj.charAt(4));// string ifadenin 4. elemanı
+	System.out.println("5.eleman "+mesaj.charAt(4));// string ifadenin 4. eleman
+	System.out.println(mesaj.concat(". yağmur yok"));
+	System.out.println(mesaj);
+
+
     }
 }
