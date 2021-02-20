@@ -7,9 +7,11 @@ public class Main {
         product.desciription="Asus Laptop";
         product.price=5000;
         product.stockAmount=3;
+        product.colour="black";
 
         ProductManager productManager =new ProductManager();
         productManager.Add(product);
         //System.out.println(product.name);
+
     }
 }

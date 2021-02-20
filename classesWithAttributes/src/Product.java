@@ -5,4 +5,6 @@ public class Product {
     String desciription;
     double price;
     int stockAmount;
+    String colour;
+    private  String kod;
 }
