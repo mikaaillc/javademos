@@ -10,5 +10,8 @@ public class Main {
         for (int i = 0; i<  ogrenciler.length ; i++) {
             System.out.println(ogrenciler[i]);
         }
+        for (String ogrenci:ogrenciler) {
+
+        }
     }
 }
