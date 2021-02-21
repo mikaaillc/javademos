@@ -1,4 +1,19 @@
 public class Product {
+    public Product(int id,String name,String desciription,double price,int stockAmount,String colour){
+        // parametreli yapıcı metod
+        System.out.println("Yapıcı blok çalıştı");
+        this.id=id;
+        this.name = name;
+        this.desciription = desciription;
+        this.price = price;
+        this.stockAmount = stockAmount;
+        this.colour = colour;
+
+    }
+
+    public Product(){ //parametresiz yapıcı blok
+
+    }
     //attiribute or field
     private int id;
     private String name;
