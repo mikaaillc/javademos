@@ -24,5 +24,6 @@ public class Main {
         for (Object i:sayilar){ // i burda obje olmalıdır array listin elemanları farklılık gösterebilir
             System.out.println(i);
         }
+
     }
 }
