@@ -3,7 +3,7 @@ public abstract class GameCalculator { //abstract sınıfta abstract opersayon o
     // Abstract sınıflar asla newlenemez sadece overide edilerek newlenebilir.
     //Abstract metodlar operasyon içermelidir
 
-    public final void gameOver(){
+    public void gameOver(){
         System.out.println("Oyun Bitti");
     }
 }
