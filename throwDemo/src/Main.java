@@ -7,13 +7,13 @@ public class Main {
         System.out.println("hesap= "+accountManager.getBalance());
         try {
             accountManager.withdraw(90);
-        } catch (Exception exception) {
+        } catch (BalanceInsufficentException exception) {
             System.out.println(exception.getMessage());
         }
         System.out.println("hesap= "+accountManager.getBalance());
         try {
             accountManager.withdraw(20);
-        } catch (Exception exception) {
+        } catch (BalanceInsufficentException exception) {
             System.out.println(exception.getMessage());;
         }
         System.out.println("hesap= "+accountManager.getBalance());
