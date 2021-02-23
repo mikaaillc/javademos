@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -10,6 +8,8 @@ public class Main {
             String _file="C:\\Users\\asus\\Desktop\\javademos\\files\\students.txt";
             //createFile(_file);
             //getFileInfo(_file);
+            readFile(_file);
+            writeFile(_file);
             readFile(_file);
 
 
@@ -50,8 +50,18 @@ public class Main {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public static void writeFile(String _file){
+        try {
+            BufferedWriter writer =new BufferedWriter(new FileWriter(_file,true));//true parametresi ile append
+            // özeliği açılmış oldu
+            writer.newLine();// yeni satır oluştur ve ekle anlamında
+            writer.write("Ali");
+            System.out.println("Dosyaya yazıldı");
+            writer.close();
 
-
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
