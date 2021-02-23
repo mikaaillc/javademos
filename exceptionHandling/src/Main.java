@@ -13,7 +13,7 @@ public class Main {
             System.out.println("Loglandı :"+exception);
         }
         finally {// ister try ister catch çalışsın her türlü çalışan bloktur
-            System.out.println("Her türlü çalışır");
+            System.out.println("Her Türlü Çalışır");
         }
 
     }
