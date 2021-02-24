@@ -15,15 +15,69 @@ public class Main {
 
         try {
             connection = helper.getConnection();
+            String sql="delete from world.city where id=?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1,4106);
+            statement.executeUpdate();// update işlemleri statement hazılandıktan
+            // sonra bu
+            // şekilde yapılır
+            System.out.println("Kayıt Silindi");
+        } catch (SQLException exception) {
+            helper.showErrorMessage(exception);
+            System.out.println(exception.getMessage());
+        } finally {
+            statement.close();
+            connection.close();
+        }
+
+
+
+    }
+    public void updateDemo() throws SQLException{
+        Connection connection = null;
+        DbHelper helper = new DbHelper();
+
+        PreparedStatement statement = null;//update bu statement ile çalışır
+
+        ResultSet resultSet;
+
+        try {
+            connection = helper.getConnection();
+            String sql="update world.city set population=100000,district='TURKEY' where id=?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1,4105);
+            statement.executeUpdate();// update işlemleri statement hazılandıktan
+            // sonra bu
+            // şekilde yapılır
+            System.out.println("Kayıt Güncellendi");
+        } catch (SQLException exception) {
+            helper.showErrorMessage(exception);
+            System.out.println(exception.getMessage());
+        } finally {
+            statement.close();
+            connection.close();
+        }
+
+    }
+    public static void insertDemo() throws SQLException {
+        Connection connection = null;
+        DbHelper helper = new DbHelper();
+
+        PreparedStatement statement = null;//insert bu statment ile yapılır
+
+        ResultSet resultSet;
+
+        try {
+            connection = helper.getConnection();
             String sql="insert into world.city (name ,countryCode,district ,population) values" +
                     "(?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1,"Yozgat");
+            statement.setString(1,"Yozgat1");
             statement.setString(2,"TUR");
             statement.setString(3,"Yozgat");
             statement.setInt(4,200000);
 
-            statement.executeUpdate();// update işlemleri statement hazılandıktan
+            statement.executeUpdate();//insert işlemleri statement hazılandıktan
             // sonra bu
             // şekilde yapılır
             System.out.println("Kayıt Eklendi:");
@@ -35,10 +89,9 @@ public class Main {
             connection.close();
         }
 
-
     }
 
-    public static void selectDemo() throws SQLException {
+    public void selectDemo() throws SQLException {
         Connection connection = null;
         DbHelper helper = new DbHelper();
 
