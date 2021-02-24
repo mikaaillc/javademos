@@ -15,8 +15,8 @@ public class Main {
 
         try {
             connection = helper.getConnection();
-            String sql="insert into world.city (name ,countryCode,district ,population) values(?," +
-                    "?,?,?)";
+            String sql="insert into world.city (name ,countryCode,district ,population) values" +
+                    "(?,?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1,"Yozgat");
             statement.setString(2,"TUR");
