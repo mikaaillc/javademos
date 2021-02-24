@@ -10,7 +10,6 @@ public class Main {
         //jdps kütüphaneleri ile data base e bağlanılır
         //java-->jdbs--> oracle/mysql/vs Driverlar --> Database
         Connection connection =null;
-
         try {
             connection = DriverManager.getConnection(dbUrl,userName,password);
             System.out.println("Bağlantı oluştu");
