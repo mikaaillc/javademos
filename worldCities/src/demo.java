@@ -5,29 +5,46 @@
  */
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author asus
  */
 public class demo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form demo
-     */
+   
+    DefaultTableModel model;
+    
     public demo() {
         initComponents();
+        model =(DefaultTableModel) tblCitie.getModel();
+        
+        try {
+            ArrayList<City> cities =getCities();
+            for(City city:cities){ 
+            Object[] row={city.getId(),city.getName(),
+                city.getCountryCode(),city.getDistrict(),city.getPopulation()};
+            model.addRow(row);
+            }
+        } catch (SQLException ex) {
+           // Logger.getLogger(demo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }
-    public Arraylist<City> getCities() throws SQLException{
+    public ArrayList<City> getCities() throws SQLException{
         Connection connection =null;
         DbHelper dbHelper=new DbHelper();
         Statement statement =null;//sorgu cümlesi nesnesi
         ResultSet resultSet;//veri tabanından dönen veri
-        Arraylist<City> cities=null;
+        ArrayList<City> cities=null;
         try {
             connection =dbHelper.getConnection();//bağlantı ssağlan
             statement =connection.createStatement();
             resultSet =statement.executeQuery("Select* from city");
-            cities =new Arraylist<City>();
+            cities =new ArrayList<City>();
             while(resultSet.next()){
             cities.add(new City(resultSet.getInt("ID"),
                         resultSet.getString("Name"),
@@ -45,6 +62,7 @@ public class demo extends javax.swing.JFrame {
             connection.close();
         } 
         return cities;
+        
     }
 
     /**
@@ -58,9 +76,12 @@ public class demo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCitie = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tblCitie.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         tblCitie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -93,25 +114,53 @@ public class demo extends javax.swing.JFrame {
             tblCitie.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        txtSearch.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setText("ARA");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel1)
+                        .addGap(29, 29, 29)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(302, Short.MAX_VALUE)
+                .addContainerGap(197, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(75, 75, 75)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        String searchKey=txtSearch.getText();
+        TableRowSorter<DefaultTableModel> tableRowSorter =new TableRowSorter<>(model);
+        tblCitie.setRowSorter(tableRowSorter);
+        tableRowSorter.setRowFilter(RowFilter.regexFilter(searchKey));
+    }//GEN-LAST:event_txtSearchKeyPressed
 
     /**
      * @param args the command line arguments
@@ -149,7 +198,9 @@ public class demo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCitie;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
